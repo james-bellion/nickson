@@ -1,15 +1,17 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code class="code">/src/routes/+layout.svelte</code> - barebones layout</li>
-			<li><code class="code">/src/app.postcss</code> - app wide css</li>
-			<li>
-				<code class="code">/src/routes/+page.svelte</code> - this page, you can replace the contents
-			</li>
-		</ul>
-	</div>
-</div>
+	import { AppShell } from "@skeletonlabs/skeleton";
+
+</script>
+
+
+<AppShell>
+	<svelte:fragment slot="header"><img src="Public/Images/logo-no-background.png" alt="Logo"/></svelte:fragment>
+	<!-- (sidebarRight) -->
+	<!-- (pageHeader) -->
+	<!-- Router Slot -->
+	<slot />
+	<!-- ---- / ---- -->
+	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
+	<!-- (footer) -->
+</AppShell>
