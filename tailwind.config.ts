@@ -21,6 +21,9 @@ export default {
 						enhancements: true,
 					},
 				],
+        backgroundImage: {
+          "hero-pattern": "url('/nick4.JPG')",
+        },
 			},
 		}),
 	],
