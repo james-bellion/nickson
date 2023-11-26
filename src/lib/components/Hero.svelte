@@ -12,6 +12,13 @@ src > lib > components > Hero.svelte
 	// Hero component logic if needed
 
 	import Navbar from './Navbar.svelte';
+  import Navbar2 from './Navbar2.svelte';
+
+
+  
+  '$lib/components/Navbar2.svelte';
+   import { routes } from '$lib/components/navigation'
+
 </script>
 
 <!-- Add more snowflakes with different durations and delays -->
@@ -24,8 +31,11 @@ src > lib > components > Hero.svelte
 <div class="snowflake" style="left: 60%; animation-duration: 11s; animation-delay: 0s;" />
 <div class="snowflake" style="left: 70%; animation-duration: 14s; animation-delay: 1s;" />
 <div class="snowflake" style="left: 80%; animation-duration: 10s; animation-delay: 2s;" />
-<div class="hero flex flex-col justify-center items-center">
-	<Navbar />
+
+<div id="home" class="hero flex flex-col justify-center items-center">
+	<!-- <Navbar /> -->
+  <!-- <Navbar2 /> -->
+  <Navbar />
 
 	<!-- main text nd call to action button -->
 	<div class="text-container flex flex-col items-center justify-center">
@@ -38,13 +48,13 @@ src > lib > components > Hero.svelte
 		<button
 			class="border border-white rounded-3xl bg-[#FD6A02] text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
 		>
-			Book Now
+			<a href={routes.CONTACT}>Book Now</a>
 		</button>
 
 		<button
 			class="border bg-black border-white rounded-3xl text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
 		>
-			My Story
+			<a href={routes.ABOUT}>My Story</a>
 		</button>
 	</div>
 

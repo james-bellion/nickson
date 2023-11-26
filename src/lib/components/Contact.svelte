@@ -11,7 +11,7 @@ src > lib > components > Contact.svelte
   // Contact component logic if needed
 </script>
 
-<div class="contact hidden">
+<div id="contact" class="contact hidden">
   <h2>Contact Us</h2>
   <p>Your Contact Section Content</p>
 </div>

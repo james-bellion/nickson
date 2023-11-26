@@ -13,7 +13,7 @@ src > lib > components > About.svelte
     import Saos from 'saos';
 </script>
 
-<div class="about-container">
+<div id="about" class="about-container">
   <div class="about">
       <div class="flex items-center justify-center">
           <Saos animation={'from-left 2s cubic-bezier(0.35, 0.5, 0.65, 0.95) both'}>
