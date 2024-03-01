@@ -12,13 +12,27 @@ src > lib > components > Hero.svelte
 	// Hero component logic if needed
 
 	import Navbar from './Navbar.svelte';
-  import Navbar2 from './Navbar2.svelte';
+	import Navbar2 from './Navbar2.svelte';
 
+	('$lib/components/Navbar2.svelte');
+	import { routes } from '$lib/components/navigation';
+	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
 
-  
-  '$lib/components/Navbar2.svelte';
-   import { routes } from '$lib/components/navigation'
+	let isVisible = true;
 
+	// Function to handle scroll event
+	const handleScroll = () => {
+		isVisible = window.scrollY === 0;
+	};
+
+	// Add scroll event listener
+	onMount(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
 </script>
 
 <!-- Add more snowflakes with different durations and delays -->
@@ -34,34 +48,43 @@ src > lib > components > Hero.svelte
 
 <div id="home" class="hero flex flex-col justify-center items-center">
 	<!-- <Navbar /> -->
-  <!-- <Navbar2 /> -->
-  <Navbar />
+	<Navbar2 />
+	<!-- <Navbar /> -->
 
 	<!-- main text nd call to action button -->
-	<div class="text-container flex flex-col items-center justify-center">
-    <!-- <h2 class="custom-font text-3xl text-black">Nick Bellion</h2> -->
-		<h2 class="nu-font text-black relative bottom-7 text-lg">private instructor, new zealand  &  japan</h2>
-		<h2 class="HerovaitalicOblique text-6xl text-black relative bottom-4">Carve Memories, Shred Limits.</h2>
-		<!-- <h2 class="NeueMontreal-Regular text-6xl text-black relative bottom-1">New Zealand</h2> -->
-	</div>
-	<div>
-		<button
-			class="border border-white rounded-3xl bg-[#FD6A02] text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
+	{#if isVisible}
+		<div
+			class="text-container flex flex-col items-center justify-center"
+			transition:fade={{ duration: 500 }}
 		>
-			<a href={routes.CONTACT}>Book Now</a>
-		</button>
+			<!-- <h2 class="custom-font text-3xl text-black">Nick Bellion</h2> -->
+			<h2 class="nu-font text-black relative bottom-7 text-lg">
+				private instructor, new zealand & japan
+			</h2>
+			<h2 class="HerovaitalicOblique text-6xl text-black relative bottom-4">
+				Carve confidence, reach peaks.
+			</h2>
+			<!-- <h2 class="NeueMontreal-Regular text-6xl text-black relative bottom-1">New Zealand</h2> -->
+		</div>
+		<div transition:fade={{ duration: 500 }}>
+			<button
+				class="border border-white rounded-3xl background text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
+			>
+				<a href={routes.CONTACT}>Book Now</a>
+			</button>
 
-		<button
-			class="border bg-black border-white rounded-3xl text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
-		>
-			<a href={routes.ABOUT}>My Story</a>
-		</button>
-	</div>
+			<button
+				class="border glass bg-black border-white rounded-3xl text-white px-4 py-2 m-2 transition-all duration-300 hover:bg-white hover:text-black hover:shadow-lg transform hover:scale-105 focus:outline-none focus:shadow-outline"
+			>
+				<a href={routes.ABOUT}>My Story</a>
+			</button>
+		</div>
+	{/if}
 
-
-	<div class="absolute xs:bottom-10 bottom-5 w-full flex justify-center items-center">
-		<svg
-			width="40px"
+	<div transition:fade={{ duration: 500 }} class="absolute xs:bottom-10 bottom-5 w-full flex justify-center items-center">
+		{#if isVisible}
+    <svg
+			width="30px"
 			height="100%"
 			viewBox="0 0 247 390"
 			version="1.1"
@@ -80,10 +103,23 @@ src > lib > components > Hero.svelte
 				style="fill:none;stroke:#fff;stroke-width:20px;"
 			/>
 		</svg>
+    {/if}
 	</div>
 </div>
 
 <style>
+.background {
+background: hsla(243, 57%, 53%, 1);
+
+background: linear-gradient(135deg, hsla(243, 57%, 53%, 1) 12%, hsla(319, 55%, 46%, 1) 100%);
+
+background: -moz-linear-gradient(135deg, hsla(243, 57%, 53%, 1) 12%, hsla(319, 55%, 46%, 1) 100%);
+
+background: -webkit-linear-gradient(135deg, hsla(243, 57%, 53%, 1) 12%, hsla(319, 55%, 46%, 1) 100%);
+
+
+}
+
 	.hero {
 		height: 100vh;
 		display: flex;
@@ -99,6 +135,17 @@ src > lib > components > Hero.svelte
 		background-repeat: no-repeat;
 		color: white;
 		top: 50;
+	}
+
+	.hero::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 30%;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
+		pointer-events: none;
 	}
 
 	@font-face {
@@ -190,17 +237,16 @@ src > lib > components > Hero.svelte
 		background-image: linear-gradient(316deg, #50d8d7 0%, #923993 74%);
 	}
 
-
-@keyframes scroll {
-	0% {
-		transform: translateY(0);
+	@keyframes scroll {
+		0% {
+			transform: translateY(0);
+		}
+		30% {
+			transform: translateY(60px);
+		}
 	}
-	30% {
-		transform: translateY(60px);
-	}
-}
 
-svg #wheel {
-	animation: scroll ease 2s infinite;
-}
+	svg #wheel {
+		animation: scroll ease 2s infinite;
+	}
 </style>

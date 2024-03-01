@@ -14,7 +14,7 @@ import Navbar from '$lib/components/Navbar.svelte';
   <div slot="pageHeader">
   </div>
 
-  <main>
+  <main class="!overflow-hidden">
     <Hero />
     <About />
     <slot />
